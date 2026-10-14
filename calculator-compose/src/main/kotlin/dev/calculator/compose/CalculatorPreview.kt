@@ -32,3 +32,15 @@ private fun CalculatorErrorPreview() {
         Calculator(state = CalculatorState("1/0", error = CalculatorError.DIVISION_BY_ZERO), onAction = {}, modifier = Modifier.fillMaxWidth())
     }
 }
+
+@Preview(showBackground = true, widthDp = 360, locale = "en")
+@Composable
+private fun CalculatorRepeatingResultPreview() {
+    MaterialTheme {
+        Calculator(
+            state = CalculatorState("1/3", "0.3333333333333333333333333333333333", true),
+            onAction = {},
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}

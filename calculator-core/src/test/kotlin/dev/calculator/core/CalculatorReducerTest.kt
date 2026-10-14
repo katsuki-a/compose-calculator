@@ -107,4 +107,27 @@ class CalculatorReducerTest {
         assertEquals(CalculatorError.LIMIT_EXCEEDED, state.error)
     }
     @Test(expected = IllegalArgumentException::class) fun invalidDigitRejected() { digit(10) }
+    @Test fun resultDisplayDoesNotReplaceCalculationValue() {
+        val state = press(CalculatorState("1/3"), CalculatorAction.Equals)
+        assertEquals("≈ 0.333333333333", state.display)
+        assertEquals("0.3333333333333333333333333333333333", state.result)
+    }
+    @Test fun continuedCalculationUsesUnroundedResult() {
+        val result = press(CalculatorState("1/3"), CalculatorAction.Equals)
+        val continued = press(result, op(CalculatorOperator.MULTIPLY))
+        val completed = press(press(continued, digit(3)), CalculatorAction.Equals)
+        assertEquals("0.3333333333333333333333333333333333*", continued.expression)
+        assertEquals("0.9999999999999999999999999999999999", completed.result)
+        assertEquals("≈ 1", completed.display)
+    }
+    @Test fun scientificDisplayContinuesUsingPlainEngineValue() {
+        val result = press(CalculatorState("1/10000000"), CalculatorAction.Equals)
+        assertEquals("1e-7", result.display)
+        assertEquals("0.0000001*", press(result, op(CalculatorOperator.MULTIPLY)).expression)
+    }
+    @Test fun backspaceEditsFullPrecisionValue() {
+        val result = press(CalculatorState("1/3"), CalculatorAction.Equals)
+        assertEquals(result.result!!.dropLast(1), press(result, CalculatorAction.Backspace).expression)
+    }
+
 }

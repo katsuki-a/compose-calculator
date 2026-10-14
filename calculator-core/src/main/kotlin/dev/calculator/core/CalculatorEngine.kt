@@ -8,6 +8,7 @@ public enum class CalculatorError { INVALID_EXPRESSION, DIVISION_BY_ZERO, LIMIT_
 
 public sealed interface CalculationResult {
     public data class Success(val value: BigDecimal) : CalculationResult {
+        /** Full engine precision in plain notation; use CalculatorResultFormatter for UI output. */
         public val formatted: String get() = value.stripTrailingZeros().toPlainString()
     }
     public data class Failure(val error: CalculatorError) : CalculationResult

@@ -122,7 +122,7 @@ Calculator(
 
 The calculator follows `MaterialTheme` colors and typography. Its maximum width is 420dp, and keys have a minimum height of 56dp. The UI scrolls vertically when space is limited, and long results scroll horizontally. Apply suitable window insets and a bounded height in the host. When nesting the calculator inside another vertical scrolling container, constrain its height with a modifier such as `Modifier.height(...)`.
 
-All bundled labels and error messages are in English. Override `CalculatorLabels` to customize or localize them. Digits are ASCII, and the decimal separator is `.`. Physical keyboard input, scientific notation, digit grouping, trigonometric functions, memory keys, and calculation history are not included.
+All bundled labels and error messages are in English. Override `CalculatorLabels` to customize or localize them. Digits are ASCII, and the decimal separator is `.`. Physical keyboard input, scientific-notation entry, digit grouping, trigonometric functions, memory keys, and calculation history are not included.
 
 ## Use the calculation engine
 
@@ -140,6 +140,31 @@ when (val result = CalculatorEngine.evaluate("(12.5+7.5)*3")) {
 - The engine also accepts `× ÷ −`. Implicit multiplication such as `2(3)` is rejected by the expression API; the keypad inserts `*` where needed
 - Failures are returned as `INVALID_EXPRESSION`, `DIVISION_BY_ZERO`, or `LIMIT_EXCEEDED`
 - Expressions are limited to 512 characters. Parentheses and unary signs also have a recursive depth limit to reject excessive input
+
+## Result display precision
+
+Results display **at most 12 significant digits**, including both the integer and fractional parts. Leading zeros do not count. This keeps non-terminating decimals readable without using a fixed number of decimal places that could erase very small values.
+
+- Round with **HALF_EVEN** (ties to the nearest even final digit), matching the engine's rounding mode.
+- Remove trailing fractional zeros and an unnecessary decimal point. Zero displays as `0`.
+- Use plain notation for decimal exponents from -6 through 11 (absolute values from `0.000001` up to, but excluding, `1e+12`). Use scientific notation outside that range. Choose notation after rounding, including any carry to a new exponent.
+- Prefix the result with **`≈`** when display rounding changes the engine's numeric value. The indicator describes display rounding; the engine itself still has finite, 34-digit precision.
+- Apply this policy consistently to all results, including terminating decimals or integers exceeding 12 significant digits. Input expressions keep their entered digits and can scroll.
+
+| Calculation | Display |
+| --- | --- |
+| `1/3` | `≈ 0.333333333333` |
+| `2/3` | `≈ 0.666666666667` |
+| `1/8` | `0.125` |
+| `123456789/7` | `≈ 17636684.1429` |
+| `1/10000000` | `1e-7` |
+| `1000000000000` | `1e+12` |
+
+**Display rounding never changes the stored calculation result.** `CalculatorState.result`, `CalculationResult.Success.value`, `Success.formatted`, and `onResult` retain the engine's precision. Continued operations and state restoration use the unrounded engine value. For example, `1/3`, `=`, `×3`, `=` retains `0.9999999999999999999999999999999999` and displays `≈ 1`, instead of multiplying the shortened display text.
+
+Use `CalculatorResultFormatter.format(value)` to apply the same presentation policy outside Compose. `CalculatorState.display` already uses it. Display strings may contain `≈` or scientific notation and must not be passed to the expression engine. Backspace edits the full stored result rather than its shortened display.
+
+See the [repeating-decimal result preview](docs/previews/repeating.png).
 
 ## Key behavior
 
@@ -166,7 +191,7 @@ when (val result = CalculatorEngine.evaluate("(12.5+7.5)*3")) {
 ./gradlew publishToMavenLocal
 ```
 
-Open `CalculatorPreview.kt` in Android Studio to inspect light, dark, and large-text error previews. See [VALIDATION.md](VALIDATION.md) for completed checks and images.
+Open `CalculatorPreview.kt` in Android Studio to inspect light, dark, large-text error, and repeating-result previews. See [VALIDATION.md](VALIDATION.md) for completed checks and images.
 
 ## License
 

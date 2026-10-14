@@ -22,11 +22,15 @@ public sealed interface CalculatorAction {
 /** Immutable state suitable for a ViewModel, StateFlow, or the provided Compose controller. */
 public data class CalculatorState(
     val expression: String = "",
+    /** Canonical engine value, retained at calculation precision for callbacks and continuation. */
     val result: String? = null,
     val isResult: Boolean = false,
     val error: CalculatorError? = null,
 ) {
-    public val display: String get() = if (isResult) result ?: "0" else expression.ifEmpty { "0" }
+    public val display: String
+        get() = if (isResult) {
+            result?.toBigDecimalOrNull()?.let(CalculatorResultFormatter::format) ?: result ?: "0"
+        } else expression.ifEmpty { "0" }
 }
 
 /** Pure state transition; it never mutates the supplied state. */

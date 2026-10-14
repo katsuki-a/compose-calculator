@@ -4,8 +4,8 @@ Verification date: October 15, 2026 (Japan Standard Time). Environment: macOS / 
 
 | Check | Result |
 | --- | --- |
-| `:calculator-core:test` | 49 passed, 0 failed or skipped: 23 engine tests and 26 reducer tests |
-| `:calculator-compose:connectedDebugAndroidTest` | 6 passed, 0 failed or skipped on the Resizable Android 16 / API 36 / arm64 emulator |
+| `:calculator-core:test` | 73 passed, 0 failed or skipped: 23 engine tests, 30 reducer tests, and 20 result-formatting tests |
+| `:calculator-compose:connectedDebugAndroidTest` | 7 passed, 0 failed or skipped on the Resizable Android 16 / API 36 / arm64 emulator |
 | `:calculator-compose:assembleRelease` | AAR generated successfully |
 | `:sample:assembleDebug` | APK generated, installed, and launched on the emulator; its screen was inspected |
 | `:calculator-compose:lintRelease` | 0 warnings and 0 errors |
@@ -15,9 +15,9 @@ Verification date: October 15, 2026 (Japan Standard Time). Environment: macOS / 
 
 ## Test coverage
 
-Engine tests cover precedence, parentheses, left associativity, decimal arithmetic, repeating-decimal rounding, signs, percentage behavior, invalid expressions, division by zero, and expression length and depth limits. Reducer tests cover continuation from results, new input, entering digits after a sign change, deletion, and error recovery.
+Engine tests cover precedence, parentheses, left associativity, decimal arithmetic, repeating-decimal rounding, signs, percentage behavior, invalid expressions, division by zero, and expression length and depth limits. Reducer tests cover continuation from results, new input, entering digits after a sign change, deletion, and error recovery. Formatting tests cover 12 significant digits, HALF_EVEN ties, negative numbers, trailing zeros, scientific-notation boundaries, rounding carries, and small values that must not become zero. Continuation tests verify that calculations use the full stored value rather than the rounded display.
 
-UI tests cover calculation by tapping keys, result callbacks, duplicate-notification prevention for repeated `=`, division by zero and recovery, restoration of input, results and errors, and stateless action callbacks. State restoration is tested with Compose's `StateRestorationTester`; actual OS-initiated process termination was not exercised.
+UI tests cover calculation by tapping keys, result callbacks, duplicate-notification prevention for repeated `=`, division by zero and recovery, restoration of input, results and errors, and stateless action callbacks. A repeating-result UI test verifies the shortened display, full-precision callbacks, restoration, and continuation after restoration. State restoration is tested with Compose's `StateRestorationTester`; actual OS-initiated process termination was not exercised.
 
 ## Visual verification
 
@@ -27,6 +27,7 @@ Each `@Preview` was rendered individually in Android Studio. Fresh PNG files wer
 - [Dark theme / 360dp / expression entry](docs/previews/dark.png)
 - [English / 320dp / fontScale 1.5 / division-by-zero error](docs/previews/error.png)
 - [Running sample APK](docs/previews/sample.png)
+- [Repeating decimal / 360dp / 12 significant digits and approximation indicator](docs/previews/repeating.png)
 
 The error preview was regenerated after removing the Japanese resources. The division-by-zero UI test also checks the English error text.
 

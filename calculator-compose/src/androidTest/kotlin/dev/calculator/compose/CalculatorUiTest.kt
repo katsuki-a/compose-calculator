@@ -78,4 +78,25 @@ class CalculatorUiTest {
         tap("AC")
         compose.runOnIdle { assertEquals(listOf(CalculatorAction.Clear), actions) }
     }
+    @Test fun roundedDisplayRestoresFullPrecisionAndCallback() {
+        val results = mutableListOf<BigDecimal>()
+        val restoration = StateRestorationTester(compose)
+        restoration.setContent {
+            MaterialTheme { Calculator(modifier = Modifier.fillMaxWidth(), onResult = { results.add(it) }) }
+        }
+        tap("1", "÷", "3", "=")
+        compose.onNodeWithTag("calculator_display").assertTextEquals("≈ 0.333333333333")
+        restoration.emulateSavedInstanceStateRestore()
+        compose.onNodeWithTag("calculator_display").assertTextEquals("≈ 0.333333333333")
+        compose.runOnIdle {
+            assertEquals(listOf(BigDecimal("0.3333333333333333333333333333333333")), results)
+        }
+        tap("×", "3", "=")
+        compose.onNodeWithTag("calculator_display").assertTextEquals("≈ 1")
+        compose.runOnIdle {
+            assertEquals(BigDecimal("0.9999999999999999999999999999999999"), results.last())
+            assertEquals(2, results.size)
+        }
+    }
+
 }
