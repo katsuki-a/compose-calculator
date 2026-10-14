@@ -168,8 +168,6 @@ when (val result = CalculatorEngine.evaluate("(12.5+7.5)*3")) {
 
 Open `CalculatorPreview.kt` in Android Studio to inspect light, dark, and large-text error previews. See [VALIDATION.md](VALIDATION.md) for completed checks and images.
 
-Design references: [Save UI state in Compose](https://developer.android.com/develop/ui/compose/state-saving), [State hoisting](https://developer.android.com/develop/ui/compose/state-hoisting), [Compose Compiler setup](https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler), and [Compose BOM](https://developer.android.com/develop/ui/compose/bom).
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
