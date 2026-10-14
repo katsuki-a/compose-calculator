@@ -8,6 +8,14 @@ Android / Jetpack Composeに組み込める電卓ライブラリです。計算�
 - `calculator-compose`: Material 3電卓UI、保存・復元可能なController、日本語・英語の読み上げラベル
 - `sample`: ライブラリを利用するAndroidアプリ
 
+## スクリーンショット
+
+| ライトテーマ | ダークテーマ |
+| --- | --- |
+| <img src="docs/previews/light.png" alt="ライトテーマの電卓。計算式 (12.5+7.5)×3 と結果60を表示" width="280"> | <img src="docs/previews/dark.png" alt="ダークテーマの電卓。計算式128÷4を入力中" width="280"> |
+
+上の画像はCompose Previewで描画したものです。[サンプルアプリの実行画面](docs/previews/sample.png)と[日本語のエラー表示](docs/previews/error.png)も確認できます。
+
 ## すぐに使う
 
 ```kotlin
