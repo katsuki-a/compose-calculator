@@ -1,0 +1,154 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.calculator",
+    "module": "calculator-compose",
+    "version": "0.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.6.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "dev.calculator",
+          "module": "calculator-core",
+          "version": {
+            "requires": "0.1.0"
+          }
+        },
+        {
+          "group": "androidx.compose",
+          "module": "compose-bom",
+          "version": {
+            "requires": "2026.03.01"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          }
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui"
+        },
+        {
+          "group": "androidx.compose.material3",
+          "module": "material3"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.3.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "calculator-compose-0.1.0.aar",
+          "url": "calculator-compose-0.1.0.aar",
+          "size": 41879,
+          "sha512": "347cc276c50dc2199fccb1e38e1860addaef4a36b271e64a59f8a3b90e8483357a2347b14b6b42b2983851de15b294e5fee60ce6044c3ec143dc603129d15dfd",
+          "sha256": "999c0d2eb1540f8c62f40c8b17a682ee6b86dc91d70ffd6f67cf3fffb6d7be75",
+          "sha1": "0a0438f114ad6369b1c4511da86090a0b8c08780",
+          "md5": "13021109dbfb79a8fac6f8988f3598ac"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation"
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui-tooling-preview"
+        },
+        {
+          "group": "dev.calculator",
+          "module": "calculator-core",
+          "version": {
+            "requires": "0.1.0"
+          }
+        },
+        {
+          "group": "androidx.compose",
+          "module": "compose-bom",
+          "version": {
+            "requires": "2026.03.01"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          }
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui"
+        },
+        {
+          "group": "androidx.compose.material3",
+          "module": "material3"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.3.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "calculator-compose-0.1.0.aar",
+          "url": "calculator-compose-0.1.0.aar",
+          "size": 41879,
+          "sha512": "347cc276c50dc2199fccb1e38e1860addaef4a36b271e64a59f8a3b90e8483357a2347b14b6b42b2983851de15b294e5fee60ce6044c3ec143dc603129d15dfd",
+          "sha256": "999c0d2eb1540f8c62f40c8b17a682ee6b86dc91d70ffd6f67cf3fffb6d7be75",
+          "sha1": "0a0438f114ad6369b1c4511da86090a0b8c08780",
+          "md5": "13021109dbfb79a8fac6f8988f3598ac"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "calculator-compose-0.1.0-sources.jar",
+          "url": "calculator-compose-0.1.0-sources.jar",
+          "size": 4642,
+          "sha512": "61a0dffea92762a0df9625a79fba31f278936f858a0d153f94591889a820166e515a3e81c84ec64edefc1eac0ad89d366df80adc791e9a25e42f66ad06c86337",
+          "sha256": "dd6875476b81b632716b12515d680e13c91ebf5b3cf5cf3b2a0b621ba39c17ce",
+          "sha1": "8861c134099f4389b24d00a0c9cd9e8d52278536",
+          "md5": "4daf40f3baf4d8c509a81692c7176ce4"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+<resources>
+    <string name="calculator_clear">Clear all</string>
+    <string name="calculator_backspace">Delete last character</string>
+    <string name="calculator_open_parenthesis">Open parenthesis</string>
+    <string name="calculator_close_parenthesis">Close parenthesis</string>
+    <string name="calculator_toggle_sign">Change sign</string>
+    <string name="calculator_decimal_point">Decimal point</string>
+    <string name="calculator_percent">Percent (divide by 100)</string>
+    <string name="calculator_add">Add</string>
+    <string name="calculator_subtract">Subtract</string>
+    <string name="calculator_multiply">Multiply</string>
+    <string name="calculator_divide">Divide</string>
+    <string name="calculator_equals">Calculate</string>
+    <string name="calculator_invalid_expression">Complete the expression</string>
+    <string name="calculator_division_by_zero">Cannot divide by zero</string>
+    <string name="calculator_limit_exceeded">Expression is too long or too deeply nested</string>
+</resources>
