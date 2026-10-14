@@ -25,7 +25,7 @@ private fun CalculatorDarkPreview() {
     }
 }
 
-@Preview(showBackground = true, widthDp = 320, fontScale = 1.5f, locale = "ja")
+@Preview(showBackground = true, widthDp = 320, fontScale = 1.5f, locale = "en")
 @Composable
 private fun CalculatorErrorPreview() {
     MaterialTheme {

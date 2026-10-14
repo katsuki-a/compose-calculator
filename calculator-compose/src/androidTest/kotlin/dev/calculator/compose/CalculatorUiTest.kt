@@ -36,6 +36,7 @@ class CalculatorUiTest {
         compose.setContent { MaterialTheme { Calculator(modifier = Modifier.fillMaxWidth()) } }
         tap("1", "÷", "0", "=")
         compose.onNodeWithTag("calculator_error").assertIsDisplayed()
+            .assertTextEquals("Cannot divide by zero")
         tap("7", "=")
         compose.onNodeWithTag("calculator_display").assertTextEquals("7")
     }
