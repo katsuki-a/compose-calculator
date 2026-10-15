@@ -137,10 +137,6 @@ when (val result = CalculatorEngine.evaluate("(12.5+7.5)*3")) {
 
 The engine calculates with 34 significant digits, while results display at most 12 significant digits. See [docs/spec.md](docs/spec.md) for the complete calculation, rounding, key behavior, state, and UI specification.
 
-## Design lessons
-
-[What building a calculator teaches about library requirements](docs/library-requirements.md) explains calculator behavior, Compose integration, Android distribution, verification limits, and future maintenance work, with concrete examples and self-check questions.
-
 ## Verification and distribution
 
 ```sh
